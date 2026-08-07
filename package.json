@@ -1,0 +1,13 @@
+{
+  "name": "fps-battle",
+  "version": "2.1.0",
+  "description": "钢铁前线 — 20V20 陆空载具战术射击游戏",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test-verify.mjs && node tests/test-optimization.mjs && node tests/test-controls-viewmodel.mjs && node tests/test-battlefield-vehicles.mjs && node tests/test-combat-fixes.mjs"
+  },
+  "devDependencies": {
+    "three": "0.185.1"
+  }
+}
