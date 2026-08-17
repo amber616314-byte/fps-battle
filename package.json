@@ -1,8 +1,12 @@
 {
-  "name": "fps-battle",
+  "name": "steel-meridian",
   "version": "2.1.0",
-  "description": "钢铁前线 — 20V20 陆空载具战术射击游戏",
+  "description": "Steel Meridian — browser-native tactical FPS with arena combat, AI squads and vehicles",
   "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
     "test": "node tests/test-verify.mjs && node tests/test-optimization.mjs && node tests/test-controls-viewmodel.mjs && node tests/test-battlefield-vehicles.mjs && node tests/test-combat-fixes.mjs"
