@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>钢铁前线 | 网页版战术射击</title>
+<title>钢铁子午线 · Steel Meridian | 浏览器战术射击</title>
 <link rel="stylesheet" href="css/style.css">
 <script type="importmap">
 {
@@ -25,7 +25,6 @@ window.addEventListener('unhandledrejection', e => {
   const el = document.getElementById('loading-error');
   if (el) { el.classList.remove('hidden'); el.textContent = '资源加载失败: ' + (e.reason && e.reason.message ? e.reason.message : String(e.reason)); }
 });
-// 加载超时兜底（25 秒后仍卡住则提示）
 setTimeout(() => {
   if (!document.getElementById('loading').classList.contains('hidden')) {
     const el = document.getElementById('loading-error');
@@ -34,10 +33,8 @@ setTimeout(() => {
 }, 25000);
 </script>
 
-<!-- 3D 渲染画布 -->
 <div id="game-container"></div>
 
-<!-- file:// 直开提示（浏览器安全限制，必须通过服务器访问） -->
 <script>
 if (location.protocol === 'file:') {
   document.write('<div style="position:fixed;inset:0;z-index:99999;background:#0a0c10;color:#e8eef5;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,sans-serif;text-align:center;padding:24px">' +
@@ -51,22 +48,20 @@ if (location.protocol === 'file:') {
 }
 </script>
 
-<!-- 加载画面 -->
 <div id="loading" class="overlay">
   <div class="loading-box">
-    <div class="loading-title">钢铁前线</div>
+    <div class="loading-title">钢铁子午线</div>
     <div class="loading-bar"><div id="loading-fill"></div></div>
     <div id="loading-text">正在载入战场资源…</div>
     <div id="loading-error" class="hidden"></div>
   </div>
 </div>
 
-<!-- 主菜单 -->
 <div id="menu" class="overlay">
   <div class="menu-bg"></div>
   <div class="menu-content">
-    <h1 class="game-title">钢铁<span>前线</span></h1>
-    <p class="game-sub">STEEL FRONTLINE · 网页版战术射击</p>
+    <h1 class="game-title">钢铁<span>子午线</span></h1>
+    <p class="game-sub">STEEL MERIDIAN · 浏览器战术射击</p>
 
     <div class="mode-cards">
       <div class="mode-card" data-mode="arena">
@@ -80,14 +75,13 @@ if (location.protocol === 'file:') {
       <div class="mode-card" data-mode="battlefield">
         <div class="mode-thumb thumb-battlefield"></div>
         <div class="mode-info">
-          <h2>钢铁前线 · 大战场</h2>
+          <h2>钢铁子午线 · 大战场</h2>
           <p>400×400m 20V20 征服战场：双方持续增援并争夺 5 个据点，AI 会驾驶吉普、坦克和武装直升机参与陆空战斗。</p>
           <span class="mode-tag">地图 400×400m · 固定 20V20 · 陆空载具</span>
         </div>
       </div>
     </div>
 
-    <!-- 竞技场难度配置；大战场固定 20V20 -->
     <div class="battle-config">
       <div class="config-item">
         <span class="config-label">爆破守军规模</span>
@@ -134,9 +128,7 @@ if (location.protocol === 'file:') {
   </div>
 </div>
 
-<!-- 游戏 HUD -->
 <div id="hud" class="hidden">
-  <!-- 准星 -->
   <div id="crosshair">
     <div class="ch-line ch-top"></div>
     <div class="ch-line ch-bottom"></div>
@@ -144,35 +136,25 @@ if (location.protocol === 'file:') {
     <div class="ch-line ch-right"></div>
     <div class="ch-dot"></div>
   </div>
-
-  <!-- 命中标记 -->
   <div id="hitmarker" aria-hidden="true">
     <div class="hm-line hm-tl"></div><div class="hm-line hm-tr"></div>
     <div class="hm-line hm-bl"></div><div class="hm-line hm-br"></div>
   </div>
-
-  <!-- 狙击镜遮罩 -->
   <div id="scope-overlay" class="hidden">
     <div class="scope-ring"></div>
     <div class="scope-line scope-h"></div>
     <div class="scope-line scope-v"></div>
     <div class="scope-dot"></div>
   </div>
-
-  <!-- 左下：生命/护甲 -->
   <div id="health-panel">
     <div class="hp-bar-wrap"><div id="hp-bar"></div></div>
     <div class="hp-num" id="hp-num">100</div>
   </div>
-
-  <!-- 右下：弹药 -->
   <div id="ammo-panel">
     <div id="ammo-mag">30</div>
     <div id="ammo-reserve">/ 90</div>
     <div id="weapon-name">突击步枪</div>
   </div>
-
-  <!-- 左上：任务信息 -->
   <div id="mission-panel">
     <div id="wave-info">爆破行动 · 150s</div>
     <div id="objective">目标：A/B 点下包，或歼灭守军</div>
@@ -180,32 +162,15 @@ if (location.protocol === 'file:') {
     <div id="enemy-count">剩余敌人 12</div>
     <div id="score-line">击杀 <span id="kill-count">0</span>　爆头 <span id="hs-count">0</span></div>
   </div>
-
-  <!-- 右上：击杀提示 -->
   <div id="killfeed"></div>
-
-  <!-- 中央消息 -->
   <div id="center-msg" class="hidden"></div>
-
-  <!-- 低血量红晕 -->
   <div id="lowhp-vignette" class="hidden"></div>
-
-  <!-- 受伤方向指示 -->
   <div id="dmg-indicator"></div>
-
-  <!-- 小地图 -->
-  <div id="minimap-wrap">
-    <canvas id="minimap" width="260" height="260"></canvas>
-  </div>
-
-  <!-- 交互提示 -->
+  <div id="minimap-wrap"><canvas id="minimap" width="260" height="260"></canvas></div>
   <div id="interact-hint" class="hidden"></div>
-
-  <!-- 击杀飘字 -->
   <div id="popups"></div>
 </div>
 
-<!-- 暂停菜单 -->
 <div id="pause" class="overlay hidden">
   <div class="pause-box">
     <h2>已暂停</h2>
@@ -216,7 +181,6 @@ if (location.protocol === 'file:') {
   </div>
 </div>
 
-<!-- 死亡画面 -->
 <div id="death" class="overlay hidden">
   <div class="end-box">
     <h2 class="end-title death-title">你阵亡了</h2>
@@ -225,7 +189,6 @@ if (location.protocol === 'file:') {
   </div>
 </div>
 
-<!-- 胜利画面 -->
 <div id="win" class="overlay hidden">
   <div class="end-box">
     <h2 class="end-title win-title">任务完成！</h2>
@@ -235,7 +198,6 @@ if (location.protocol === 'file:') {
   </div>
 </div>
 
-<!-- 失败画面 -->
 <div id="lose" class="overlay hidden">
   <div class="end-box">
     <h2 class="end-title lose-title">战线崩溃…</h2>
